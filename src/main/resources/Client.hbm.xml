@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.kinobooking.secure.entity.Client" table="Client">
+        <id name="clientId" type="int">
+            <column name="client_ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="login" type="string">
+            <column name="LOGIN" length="30" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="30" not-null="true" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="first_name" length="30" not-null="true"/>
+        </property>
+        <property name="lastName" type="string">
+            <column name="last_name" length="30" not-null="true"/>
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" not-null="true"/>
+        </property>
+    </class>
+    <class name="com.kinobooking.secure.entity.Cinema" table="Cinema">
+        <id name="cinemaId" type="int">
+            <column name="cinema_ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="30" not-null="true"/>
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="40" not-null="false"/>
+        </property>
+    </class>
+    <class name="com.kinobooking.secure.entity.Film" table="Film">
+        <id name="filmId" type="int">
+            <column name="film_ID" precision="5" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="filmName" type="string">
+            <column name="film_name" length="30" not-null="true"/>
+        </property>
+        <property name="filmDescrip" type="string">
+            <column name="film_descrip" length="70" not-null="false"/>
+        </property>
+        <property name="filmDuration" type="Date">
+            <column name="film_duration" sql-type="timestamp" not-null="true"/>
+        </property>
+        <property name="filmPrice" type="int">
+            <column name="film_price" sql-type="number" not-null="true"/>
+        </property>
+    </class>
+
+</hibernate-mapping>
