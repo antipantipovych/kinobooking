@@ -33,10 +33,14 @@ public class ClientDetailsServiceImpl implements UserDetailsService {
         // который позволит проверить введеный пользователем логин и пароль
         // и уже потом аутентифицировать пользователя
         UserDetails userDetails =
-                new org.springframework.security.core.userdetails.User(client.getLogin(),
+                new org.springframework.security.core.userdetails.User(client.getEmail(),
                         client.getPassword(),roles);
 
         return userDetails;
     }
 
 }
+
+
+
+

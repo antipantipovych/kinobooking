@@ -28,8 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(clientDetailsService);
-//                .passwordEncoder(getShaPasswordEncoder());
+                .userDetailsService(clientDetailsService)
+                .passwordEncoder(getShaPasswordEncoder());
     }
 
     @Override
@@ -56,7 +56,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("j_password")
                 // даем доступ к форме логина всем
                 .permitAll();
-
         http.logout()
                 // разрешаем делать логаут всем
                 .permitAll()

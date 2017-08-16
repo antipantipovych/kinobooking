@@ -16,6 +16,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context){
        Client client = (Client) obj;
+        System.out.println(client.getPassword()+" "+client.getConfirmPass());
         return client.getPassword().equals(client.getConfirmPass());
     }
 }
