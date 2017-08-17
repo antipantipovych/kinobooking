@@ -1,68 +1,46 @@
 package com.kinobooking.secure.entity;
 
-import com.kinobooking.secure.validator.PasswordMatches;
-import com.kinobooking.secure.validator.ValidEmail;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
  * Created by Екатерина on 13.08.2017.
  */
-@PasswordMatches
 @Entity
 @Table(name="Client")
 public class Client {
     @Id
     @Column(name="client_id", unique = true, nullable = false)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="client_seq")
+    @SequenceGenerator(name="client_seq", sequenceName="client_seq", allocationSize=1)
     private int clientId;
 
-    @NotNull
-    @NotEmpty
     @Column(name="password", nullable = false, length = 30)
     private String password;
-    @NotNull
-    @NotEmpty
+
     @Column(name="first_name", nullable = false, length = 30)
     private String firstName;
-    @NotNull
-    @NotEmpty
+
     @Column(name="last_name", nullable = false, length = 30)
     private String lastName;
-    @ValidEmail
-    @NotNull
-    @NotEmpty
+
     @Column(name="email", nullable = false, length = 50)
     private String email;
 
-    private String confirmPass;
     @OneToMany(mappedBy = "client")
     private Set<Ticket> tickets;
 
     @OneToMany(mappedBy="client")
     private Set<Booking> bookings;
 
-    public String getConfirmPass() {
-        return confirmPass;
-    }
-
-    public void setConfirmPass(String confirmPass) {
-        this.confirmPass = confirmPass;
-    }
-
-    public Client(int clientId, String password, String firstName, String lastName, String email, String confirmPass) {
-        this.clientId = clientId;
+    public Client(String password, String lastName, String email, String firstName) {
         this.password = password;
-        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.confirmPass = confirmPass;
+        this.firstName = firstName;
     }
 
-    public Client(int clientId,  String password, String firstName, String lastName, String email, Set<Ticket> tickets, Set<Booking> bookings) {
+    public Client(int clientId, String password, String firstName, String lastName, String email, Set<Ticket> tickets, Set<Booking> bookings) {
         this.clientId = clientId;
         this.password = password;
         this.firstName = firstName;
@@ -139,5 +117,16 @@ public class Client {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "clientId=" + clientId +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

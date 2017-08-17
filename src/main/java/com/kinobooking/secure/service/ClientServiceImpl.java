@@ -4,6 +4,7 @@ package com.kinobooking.secure.service;
  * Created by Екатерина on 13.08.2017.
  */
 
+import com.kinobooking.secure.dto.ClientDto;
 import com.kinobooking.secure.entity.Client;
 import com.kinobooking.secure.util.HibernateUtil;
 import com.kinobooking.secure.validator.EmailExistsException;
@@ -27,7 +28,7 @@ public class ClientServiceImpl implements ClientService {
            System.out.println(query);
            client = (Client) query.uniqueResult();
            System.out.println("Hello2");
-           System.out.println("!" + client.getClientId() + " " + client.getEmail() + " " + client.getPassword());
+//           System.out.println("!" + client.getClientId() + " " + client.getEmail() + " " + client.getPassword());
            session.close();
        }
        catch (Exception e){
@@ -37,17 +38,28 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client save(Client client){
-        Locale.setDefault(Locale.ENGLISH);
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        long id= (long)session.save(client);
-        session.flush();
-        session.close();
-        return client;
+    public Client save(ClientDto client){
+        Client c= new Client(client.getPassword(),client.getLastName(),client.getEmail(),client.getFirstName());
+       try {
+           Locale.setDefault(Locale.ENGLISH);
+
+           Session session = HibernateUtil.getSessionFactory().openSession();
+           session.beginTransaction();
+           //long id = (long) session.save(client);
+           //System.out.println(id);
+           session.save(c);
+           session.flush();
+           session.getTransaction().commit();
+           System.out.println(client.toString());
+       }
+           catch(Exception e){
+               e.printStackTrace();
+           }
+        return c;
     }
     @Transactional
     @Override
-    public Client registerNewUserAccount(Client account) throws EmailExistsException {
+    public Client registerNewUserAccount(ClientDto account) throws EmailExistsException {
 
         if (emailExist(account.getEmail())) {
             throw new EmailExistsException(

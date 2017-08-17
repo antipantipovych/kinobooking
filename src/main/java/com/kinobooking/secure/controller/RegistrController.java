@@ -1,8 +1,9 @@
 package com.kinobooking.secure.controller;
 
+import com.kinobooking.secure.dto.ClientDto;
 import com.kinobooking.secure.entity.Client;
-import com.kinobooking.secure.service.ClientServiceImpl;
-import com.kinobooking.secure.validator.EmailExistsException;
+import com.kinobooking.secure.service.ClientDetailsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -20,16 +21,17 @@ import javax.validation.Valid;
 @RequestMapping("/registr")
 public class RegistrController {
 
-    private ClientServiceImpl service;
+    @Autowired
+    private ClientDetailsServiceImpl service;
 
     @RequestMapping(method = RequestMethod.GET)
     public String showRegistrationForm( Model model) {
-        Client client = new Client();
-        model.addAttribute("client", client);
+//        Client client = new Client();
+//        model.addAttribute("client", client);
         return "registr";
     }
     @RequestMapping( method = RequestMethod.POST)
-    public String submit(@Valid @ModelAttribute("client")Client client,
+    public String submit(@Valid @ModelAttribute("client")ClientDto client,
                          BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             return "error";
@@ -39,8 +41,20 @@ public class RegistrController {
         model.addAttribute("email", client.getEmail());
         model.addAttribute("password", client.getPassword());
         model.addAttribute("confirmPass", client.getConfirmPass());
-
-        return "login";
+        System.out.println(client.toString());
+        Client registered = new Client();
+        if (!result.hasErrors()) {
+            registered = service.createUserAccount(client, result);
+        }
+        if (registered == null) {
+            result.rejectValue("email", "message.regError");
+        }
+        if (result.hasErrors()) {
+            return "registr";
+        }
+        else {
+            return "login";
+        }
     }
 
 //    @RequestMapping(method = RequestMethod.POST)
@@ -63,16 +77,17 @@ public class RegistrController {
 //    }
 
     @ModelAttribute("client")
-    public Client newClient(){
-        return new Client();
+    public ClientDto newClient(){
+        return new ClientDto();
     }
-    private Client createUserAccount(Client account, BindingResult result) {
-        Client registered = null;
-        try {
-            registered = service.registerNewUserAccount(account);
-        } catch (EmailExistsException e) {
-            return null;
-        }
-        return registered;
-    }
+//    private Client createUserAccount(Client account, BindingResult result) {
+//        Client registered = null;
+//        try {
+//            System.out.println(account.toString());
+//            registered = clientService.registerNewUserAccount(account);
+//        } catch (EmailExistsException e) {
+//            return null;
+//        }
+//        return registered;
+//    }
 }

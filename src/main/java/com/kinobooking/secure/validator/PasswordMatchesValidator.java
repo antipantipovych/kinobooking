@@ -1,6 +1,6 @@
 package com.kinobooking.secure.validator;
 
-import com.kinobooking.secure.entity.Client;
+import com.kinobooking.secure.dto.ClientDto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -15,7 +15,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
     }
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context){
-       Client client = (Client) obj;
+       ClientDto client = (ClientDto) obj;
         System.out.println(client.getPassword()+" "+client.getConfirmPass());
         return client.getPassword().equals(client.getConfirmPass());
     }
