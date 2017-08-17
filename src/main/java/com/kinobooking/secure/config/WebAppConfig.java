@@ -8,6 +8,7 @@ import com.kinobooking.secure.service.ClientDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -38,6 +39,10 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public UserDetailsService getUserDetailsService(){
         return new ClientDetailsServiceImpl();
+    }
+    @Bean
+    public ShaPasswordEncoder getShaPasswordEncoder(){
+        return new ShaPasswordEncoder();
     }
 
 }

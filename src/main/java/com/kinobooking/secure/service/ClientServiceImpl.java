@@ -10,6 +10,8 @@ import com.kinobooking.secure.util.HibernateUtil;
 import com.kinobooking.secure.validator.EmailExistsException;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,8 @@ import java.util.Locale;
 
 @Service
 public class ClientServiceImpl implements ClientService {
+    @Autowired
+    private ShaPasswordEncoder shaPasswordEncoder;
     @Override
     public Client getClient(String login){
         Client client= null;
@@ -39,7 +43,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client save(ClientDto client){
-        Client c= new Client(client.getPassword(),client.getLastName(),client.getEmail(),client.getFirstName());
+        Client c= new Client(shaPasswordEncoder.encodePassword(client.getPassword(),""),client.getLastName(),client.getEmail(),client.getFirstName());
        try {
            Locale.setDefault(Locale.ENGLISH);
 

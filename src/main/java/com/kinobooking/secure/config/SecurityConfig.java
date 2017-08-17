@@ -6,7 +6,6 @@ package com.kinobooking.secure.config;
 
 import com.kinobooking.secure.service.ClientDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -23,13 +22,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private ClientDetailsServiceImpl clientDetailsService;
 
+    @Autowired
+    private ShaPasswordEncoder shaPasswordEncoder;
     // регистрируем нашу реализацию ClientDetailsService
     // а также PasswordEncoder для приведения пароля в формат SHA1
     @Autowired
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(clientDetailsService)
-                .passwordEncoder(getShaPasswordEncoder());
+                .passwordEncoder(shaPasswordEncoder);
     }
 
     @Override
@@ -68,11 +69,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    // Указываем Spring контейнеру, что надо инициализировать <b></b>ShaPasswordEncoder
-    // Это можно вынести в WebAppConfig, но для понимаемости оставил тут
-    @Bean
-    public ShaPasswordEncoder getShaPasswordEncoder(){
-        return new ShaPasswordEncoder();
-    }
 
 }

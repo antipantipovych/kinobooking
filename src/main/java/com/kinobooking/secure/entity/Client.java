@@ -15,7 +15,7 @@ public class Client {
     @SequenceGenerator(name="client_seq", sequenceName="client_seq", allocationSize=1)
     private int clientId;
 
-    @Column(name="password", nullable = false, length = 30)
+    @Column(name="password", nullable = false, length = 50)
     private String password;
 
     @Column(name="first_name", nullable = false, length = 30)
