@@ -30,11 +30,11 @@ public class RegistrController {
 //        model.addAttribute("client", client);
         return "registr";
     }
-    @RequestMapping( method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String submit(@Valid @ModelAttribute("client")ClientDto client,
                          BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
-            return "error";
+            return "registr";
         }
         model.addAttribute("firstName", client.getFirstName());
         model.addAttribute("lastName", client.getLastName());
@@ -47,13 +47,10 @@ public class RegistrController {
             registered = service.createUserAccount(client, result);
         }
         if (registered == null) {
-            result.rejectValue("email", "message.regError");
-        }
-        if (result.hasErrors()) {
-            return "registr";
+           return "registr";
         }
         else {
-            return "login";
+            return "redirect:/login";
         }
     }
 

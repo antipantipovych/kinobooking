@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by Екатерина on 17.08.2017.
  */
-@PasswordMatches
+@PasswordMatches(message = "Пароли не совпадают")
 public class ClientDto {
 
     @NotNull
