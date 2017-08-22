@@ -1,36 +1,42 @@
 package com.kinobooking.secure.dto;
 
 import com.kinobooking.secure.validator.PasswordMatches;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Екатерина on 17.08.2017.
  */
-@PasswordMatches(message = "Пароли не совпадают")
+@PasswordMatches
 public class ClientDto {
 
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message="Password can not be empty")
+    //@NotEmpty
+    @Size(min=6, message = "Password must be more then 6 chars")
 
     private String password;
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message="First name can not be empty")
+    //@NotEmpty
 
     private String firstName;
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message="Last name can not be empty")
+    //@NotEmpty
 
     private String lastName;
     //@ValidEmail
-    @Email
-    @NotNull
-    @NotEmpty
+    @Pattern(regexp = "^(?:[a-zA-Z0-9_'^&/+-])+(?:\\.(?:[a-zA-Z0-9_'^&/+-])+)" +
+            "*@(?:(?:\\[?(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))\\.)" +
+            "{3}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\]?)|(?:[a-zA-Z0-9-]+\\.)" +
+            "+(?:[a-zA-Z]){2,}\\.?)$",
+            message = "Not proper email")
+    //@Email
+    @NotEmpty(message="Email can not be empty")
+   // @NotEmpty
     private String email;
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message="Password can not be empty")
+    //@NotEmpty
     private String confirmPass;
 
     public String getConfirmPass() {

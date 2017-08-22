@@ -35,6 +35,9 @@
         <input type="password" class="form-control" name="j_password" placeholder="введите пароль">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
     </form>
+     <center>
+        <p><a class="btn btn-lg btn-success" href="<c:url value="/registr" />" role="button">Зарегистрироваться</a></p>
+     </center>
 </div>
 
 </body>

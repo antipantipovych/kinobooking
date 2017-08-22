@@ -1,5 +1,6 @@
 package com.kinobooking.secure.service;
 
+import com.kinobooking.secure.dao.interfaces.ClientDao;
 import com.kinobooking.secure.dto.ClientDto;
 import com.kinobooking.secure.entity.Client;
 import com.kinobooking.secure.entity.enums.UserRoleEnum;
@@ -23,12 +24,12 @@ import java.util.Set;
 public class ClientDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private ClientService clientService;
+    private ClientDao clientDao;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // с помощью нашего сервиса UserService получаем User
-        Client client = clientService.getClient(email);
+        Client client = clientDao.getClient(email);
         Set<GrantedAuthority> roles = new HashSet();
         roles.add(new SimpleGrantedAuthority(UserRoleEnum.USER.name()));
 
@@ -42,14 +43,12 @@ public class ClientDetailsServiceImpl implements UserDetailsService {
         return userDetails;
     }
 
-    public Client createUserAccount(ClientDto account, BindingResult result) {
+    public Client createUserAccount(ClientDto account, BindingResult result) throws EmailExistsException {
         Client registered = null;
-        try {
+
             System.out.println(account.toString());
-            registered = clientService.registerNewUserAccount(account);
-        } catch (EmailExistsException e) {
-            return null;
-        }
+            registered = clientDao.registerNewClientAccount(account);
+
         return registered;
     }
 }

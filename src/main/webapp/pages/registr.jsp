@@ -35,7 +35,9 @@
             <form:label class="control-label col-xs-3" for="firstName" path="firstName">Имя:</form:label>
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                   <form:input type="text" class="form-control" id="firstName" path="firstName" placeholder="Введите имя"/>
-                  <form:errors path="firstName" cssClass="error"/>
+                  <font color="red">
+                    <form:errors path="firstName" cssClass="error"/>
+                  </font>
                 </div>
             </label>
         </div>
@@ -43,7 +45,9 @@
             <form:label class="control-label col-xs-3" for="lastName" path="lastName" >Фамилия:</form:label>
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                   <form:input type="text" class="form-control" id="lastName" path="lastName" placeholder="Введите фамилию"/>
-                  <form:errors path="lastName" cssClass="error"/>
+                  <font color="red">
+                    <form:errors path="lastName" cssClass="error"/>
+                  </font>
                 </div>
             </label>
         </div>
@@ -51,7 +55,9 @@
             <form:label class="control-label col-xs-3" for="email" path="email" >Email:</form:label>
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                   <form:input type="text" class="form-control" id="email" path="email" placeholder="Введите email"/>
-                  <form:errors path="email" cssClass="error"/>
+                  <font color="red">
+                    <form:errors path="email" cssClass="error"/>
+                  </font>
                 </div>
             </label>
         </div>
@@ -59,7 +65,9 @@
             <form:label class="control-label col-xs-3" for="password" path="password">Пароль:</form:label>
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                   <form:password class="form-control" id="password" path="password" placeholder="Введите пароль"/>
-                  <form:errors path="password" cssClass="error"/>
+                  <font color="red">
+                    <form:errors path="password" cssClass="error"/>
+                  </font>
                 </div>
             </label>
         </div>
@@ -67,10 +75,15 @@
             <form:label class="control-label col-xs-3" for="confirmPass" path="confirmPass" >Повтор пароля:</form:label>
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                   <form:password class="form-control" id="confirmPass" path="confirmPass" placeholder="Введите пароль еще раз"/>
-                  <form:errors path="confirmPass" cssClass="error"/>
+                  <font color="red">
+                    <form:errors path="confirmPass" cssClass="error"/>
+                  </font>
                 </div>
             </label>
         </div>
+        <font color="red">
+            <form:errors path="" class="has-error" />
+        </font>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button>
     </form:form>
 </div>
