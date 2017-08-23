@@ -1,0 +1,4 @@
+com\kinobooking\secure\dao\interfaces\ClientDao.class
+com\kinobooking\secure\exceptions\EmailExistsException.class
+com\kinobooking\secure\dao\implementations\ClientDaoImpl.class
+com\kinobooking\secure\service\ClientDetailsServiceImpl.class
