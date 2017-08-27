@@ -28,28 +28,26 @@
 
 <body>
 
-<div class="container " style="width: 300px;">
+<div class="container " style="width: 500px;">
     <form:form   method="post" modelAttribute="client" >
         <h2 class="form-signin-heading">Пожалуйста, введите Ваши данные</h2>
         <div class="form-group">
             <form:label class="control-label col-xs-3" for="firstName" path="firstName">Имя:</form:label>
-                <div class="form-group ${status.error ? 'has-error' : ''}">
-                  <form:input type="text" class="form-control" id="firstName" path="firstName" placeholder="Введите имя"/>
-                  <font color="red">
-                    <form:errors path="firstName" cssClass="error"/>
-                  </font>
-                </div>
-            </label>
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+              <form:input type="text" class="form-control" id="firstName" path="firstName" placeholder="Введите имя"/>
+              <font color="red">
+                  <form:errors path="firstName" cssClass="error"/>
+              </font>
+            </div>
         </div>
         <div class="form-group">
             <form:label class="control-label col-xs-3" for="lastName" path="lastName" >Фамилия:</form:label>
-                <div class="form-group ${status.error ? 'has-error' : ''}">
-                  <form:input type="text" class="form-control" id="lastName" path="lastName" placeholder="Введите фамилию"/>
-                  <font color="red">
-                    <form:errors path="lastName" cssClass="error"/>
-                  </font>
-                </div>
-            </label>
+            <div class="form-group ${status.error ? 'has-error' : ''}">
+              <form:input type="text" class="form-control" id="lastName" path="lastName" placeholder="Введите фамилию"/>
+              <font color="red">
+                <form:errors path="lastName" cssClass="error"/>
+              </font>
+            </div>
         </div>
         <div class="form-group">
             <form:label class="control-label col-xs-3" for="email" path="email" >Email:</form:label>
@@ -89,3 +87,4 @@
 </div>
 
 </body>
+</html>

@@ -1,6 +1,6 @@
 package com.kinobooking.secure.service;
 
-import com.kinobooking.secure.dao.interfaces.ClientDao;
+import com.kinobooking.secure.dao.ClientDao;
 import com.kinobooking.secure.entity.Client;
 import com.kinobooking.secure.entity.enums.UserRoleEnum;
 import com.kinobooking.secure.exceptions.EmailExistsException;

@@ -30,8 +30,6 @@ public class RegistrController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String showRegistrationForm(Model model) {
-//        Client client = new Client();
-//        model.addAttribute("client", client);
         return "registr";
     }
 
@@ -47,7 +45,6 @@ public class RegistrController {
         model.addAttribute("email", client.getEmail());
         model.addAttribute("password", client.getPassword());
         model.addAttribute("confirmPass", client.getConfirmPass());
-        System.out.println(client.toString());
         Client registered = new Client();
         if (!result.hasErrors()) {
             try {
@@ -56,7 +53,7 @@ public class RegistrController {
             }
             catch (EmailExistsException e){
                 result.rejectValue("email", "error.client", "An account already exists for this email");
-               // result.reject("EmailExists");
+
                 return "registr";
             }
         }

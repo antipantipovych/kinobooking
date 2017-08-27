@@ -16,9 +16,9 @@ public class Cinema {
     @GeneratedValue
     private int cinemaId;
     @Column(name="name", nullable = false, length = 30)
-    private String name;
+    private String cinemaName;
     @Column(name="location", length = 30)
-    private String location;
+    private String cinemaLocation;
     @OneToMany(mappedBy = "cinema")
     private Set<Hall> halls;
     @OneToMany(mappedBy = "cinema")
@@ -33,14 +33,14 @@ public class Cinema {
 
     public Cinema(int cinemaId, String name, String location) {
         this.cinemaId = cinemaId;
-        this.name = name;
-        this.location = location;
+        this.cinemaName = name;
+        this.cinemaLocation = location;
     }
 
     public Cinema(int cinemaId, String name, String location, Set<Hall> halls, Set<Seans> seanses, Set<Ticket> tickets, Set<FilmCinema> FCTables) {
         this.cinemaId = cinemaId;
-        this.name = name;
-        this.location = location;
+        this.cinemaName = name;
+        this.cinemaLocation = location;
         this.halls = halls;
         this.seanses = seanses;
         this.tickets = tickets;
@@ -88,21 +88,21 @@ public class Cinema {
         this.cinemaId = cinemaId;
     }
 
-    public String getName() {
-        return name;
+    public String getCinemaName() {
+        return cinemaName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCinemaName(String name) {
+        this.cinemaName = name;
     }
 
 
-    public String getLocation() {
-        return location;
+    public String getCinemaLocation() {
+        return cinemaLocation;
     }
 
-    public void setLocation(String location) {
-       this.location = location;
+    public void setCinemaLocation(String location) {
+       this.cinemaLocation = location;
     }
 
 }

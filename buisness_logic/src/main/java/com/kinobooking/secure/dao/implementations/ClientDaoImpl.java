@@ -1,6 +1,6 @@
 package com.kinobooking.secure.dao.implementations;
 
-import com.kinobooking.secure.dao.interfaces.ClientDao;
+import com.kinobooking.secure.dao.ClientDao;
 import com.kinobooking.secure.entity.Client;
 import com.kinobooking.secure.exceptions.EmailExistsException;
 import org.hibernate.Query;
@@ -52,7 +52,6 @@ public class ClientDaoImpl implements ClientDao {
     public Client save(Client client){
          try {
             Locale.setDefault(Locale.ENGLISH);
-
             Session session = sessionFactory.openSession();
             session.beginTransaction();
             session.save(client);

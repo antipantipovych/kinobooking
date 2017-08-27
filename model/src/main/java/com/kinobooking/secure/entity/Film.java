@@ -1,7 +1,5 @@
 package com.kinobooking.secure.entity;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
@@ -19,10 +17,9 @@ public class Film {
     private int filmId;
     @Column(name="film_name", nullable = false,length = 30)
     private String filmName;
-    @Column(name="film_decrip")
+    @Column(name="film_descrip", length=700)
     private String filmDescrip;
     @Column(name="film_duration")
-    @Type(type="timestamp")
     private Date filmDuration;
     @Column(name="film_price", nullable = false)
     private int filmPrice;
