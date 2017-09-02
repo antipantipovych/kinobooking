@@ -28,6 +28,7 @@ public class ClientDaoImpl implements ClientDao {
     private SessionFactory sessionFactory;
 
     @Override
+    @Transactional
     public Client getClient(String login){
         Client client= null;
         try {

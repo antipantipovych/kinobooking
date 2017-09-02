@@ -38,7 +38,6 @@ public class ClientDetailsServiceImpl implements UserDetailsService {
 
     public Client createUserAccount(Client account, BindingResult result) throws EmailExistsException {
         Client registered = null;
-        System.out.println(account.toString());
         registered = clientDao.registerNewClientAccount(account);
         return registered;
     }

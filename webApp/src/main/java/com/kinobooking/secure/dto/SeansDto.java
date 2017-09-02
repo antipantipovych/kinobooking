@@ -1,5 +1,9 @@
 package com.kinobooking.secure.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -9,7 +13,53 @@ public class SeansDto {
 
     private String filmName;
     private String cinemaName;
+    @NotNull(message="Date should be checked")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date seansDate;
+    private String seansStringDate;
+    private boolean threeD;
+    @Min(value=1, message = "Seans should be choosed")
+    private int seansId;
+
+    public SeansDto() {
+
+    }
+
+    @Override
+    public String toString() {
+        return "SeansDto{" +
+                "filmName='" + filmName + '\'' +
+                ", cinemaName='" + cinemaName + '\'' +
+                ", seansDate=" + seansDate +
+                ", seansStringDate='" + seansStringDate + '\'' +
+                ", threeD=" + threeD +
+                ", seansId=" + seansId +
+                '}';
+    }
+
+    public boolean isThreeD() {
+        return threeD;
+    }
+
+    public int getSeansId() {
+        return seansId;
+    }
+
+    public void setSeansId(int seansId) {
+        this.seansId = seansId;
+    }
+
+    public String getSeansStringDate() {
+        return seansStringDate;
+    }
+
+    public void setSeansStringDate(String seansStringDate) {
+        this.seansStringDate = seansStringDate;
+    }
+
+    public void setThreeD(boolean threeD) {
+        this.threeD = threeD;
+    }
 
     public Date getSeansDate() {
         return seansDate;

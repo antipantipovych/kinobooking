@@ -1,8 +1,7 @@
 package com.kinobooking.secure.entity;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
@@ -17,13 +16,15 @@ public class Seans {
     @GeneratedValue
     private int seansId;
     @Column(name="seans_date", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date seansDate;
     @Column(name="seans_time", nullable = false)
-    @Type(type="timestamp")
+    @Temporal(TemporalType.TIMESTAMP)
+    //@DateTimeFormat(pattern = "HH:mm a")
     private Date seansTime;
     @Column(name="avail_seats", nullable = false)
     private int seatsAvail;
-    @Column(name="3D_seans", nullable = false)
+    @Column(name="threed", nullable = false)
     private int seans_3D;
     @ManyToOne
     @JoinColumn(name="film_id", nullable = false)
@@ -36,6 +37,27 @@ public class Seans {
     private Cinema cinema;
     @OneToMany(mappedBy = "seans")
     private Set<Ticket> tickets;
+
+    @Override
+    public String toString() {
+        return "Seans{" +
+                "seansId=" + seansId +
+                ", seansDate=" + seansDate +
+                ", seansTime=" + seansTime +
+                ", seatsAvail=" + seatsAvail +
+                ", seans_3D=" + seans_3D +
+                ", film=" + film.getFilmName() +
+                ", hall=" + hall.getHallNum() +
+                ", cinema=" + cinema.getCinemaName() +
+                '}';
+    }
+
+    public String toShortString() {
+        SimpleDateFormat dateFormat= new SimpleDateFormat("dd.MM.yyyy");
+        return dateFormat.format(seansDate) +
+                " " + cinema.getCinemaName() +
+                ", " + film.getFilmName();
+    }
 
     public Seans() {
     }
@@ -78,6 +100,12 @@ public class Seans {
 
     public Date getSeansTime() {
         return seansTime;
+    }
+
+    public String getStringTime(){
+        System.out.println(seansTime);
+        SimpleDateFormat dateFormat= new SimpleDateFormat("HH:mm");
+        return dateFormat.format(seansTime);
     }
 
     public void setSeansTime(Date seansTime) {

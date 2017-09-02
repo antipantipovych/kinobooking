@@ -33,25 +33,62 @@
     <h2 class="form-heading">Введите параметры поиска</h2>
         <form:form method="post"  modelAttribute="seans">
             <div class="form-group">
-                <form:label class="control-label"  path="filmName">Фильм:</form:label>
-                <form:select path="filmName">
-                    <form:option value="${null}">-- Select --</form:option>
+                <label class="control-label" >Фильм:</label>
+                <form:select path="filmName" class="form-control">
+                    <form:option value="">-- Select --</form:option>
                     <form:options items="${listOfFilmNames}"/>
                 </form:select>
             </div>
             <div class="form-group">
-                <form:label class="control-label"  path="filmName">Кинотеатр:</form:label>
-                <form:select path="cinemaName">
-                    <form:option value="${null}">-- Select --</form:option>
+                <label class="control-label" >Кинотеатр:</label>
+                <form:select path="cinemaName" class="form-control">
+                    <form:option value="">-- Select --</form:option>
                     <form:options items="${listOfCinemaNames}"/>
                 </form:select>
             </div>
             <div class="form-group">
-                <form:label class="control-label"  path="seansDate">Дата:</form:label>
-                <form:input type="date" path="seansDate"/>
+                <label class="control-label" >Дата:</label>
+                <form:input class="form-control"  required="required" type="date" path="seansDate" id="seansDate"/>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Найти</button>
+            <div class="form-group">
+                <label class="control-label" >3D:</label>
+                <form:checkbox path="threeD"/>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" name="find" value="Find" type="submit">Найти</button>
+            <p/>
+            <button class="btn btn-lg btn-success btn-block" type="submit" name="book" value="Book">Забронировать билеты</button>
+            <font color="red">
+                <form:errors path="seansId" cssClass="error"/>
+            </font>
+            <p/>
+            <c:if test="${shortSeansNames.size() eq 0}">
+                 <font color="red">
+                    <p><output>Не найдено подходящих сеансов</output></p>
+                 </font>
+            </c:if>
+            <c:forEach items="${shortSeansNames}" var="name">
+                <p><output> ${name} </output></p>
+                <c:forEach items="${listOfSeanses}" var="s">
+                    <c:if test="${name eq s.toShortString()}">
+                        <form:radiobutton path="seansId" value="${s.seansId}"/>${s.getStringTime()}
+                    </c:if>
+                </c:forEach>
+            </c:forEach>
         </form:form>
 </div>
+
+<script>
+    var c =document.getElementById("seansDate");
+    var d= new Date();
+    var dd = d.getDate();
+    if (dd < 10) dd = "0" + dd;
+    var mm = d.getMonth() + 1;
+    if (mm < 10) mm = "0" + mm;
+    var yyyy = d.getFullYear();
+    c.min= yyyy+"-"+mm+"-"+dd;
+</script>
+
+
+
 </body>
 </html>
